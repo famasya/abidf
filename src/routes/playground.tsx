@@ -1,6 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router"
 
-export const Route = createFileRoute('/playground')({
+export const Route = createFileRoute("/playground")({
   head: () => ({
     meta: [
       {
@@ -52,10 +52,10 @@ function RouteComponent() {
   return <div>
     <h1>Playground</h1>
 
-    <div className='grid grid-cols-1 auto-rows-fr md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2'>
+    <div className="grid grid-cols-2 auto-rows-fr lg:grid-cols-3 gap-4 pt-2 mb-8">
       {projects.map((project) => (
         <div key={project.name} className="p-4 border border-zinc-300 bg-gradient-to-b from-white to-white hover:from-white hover:to-zinc-100 rounded flex flex-col">
-          <h2 className='font-semibold'>{project.name}</h2>
+          <h2 className="font-semibold">{project.name}</h2>
           <p className="my-1 text-zinc-700 text-sm flex-1 h-full">{project.description}</p>
           <div>
             <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline mt-2">Link</a>
