@@ -7,9 +7,9 @@ const links = [
 ]
 export default function Header() {
   return (
-    <header className="flex gap-2 bg-white text-black justify-between mt-4 mb-4 border-b border-zinc-200">
+    <header className="flex gap-2 bg-white text-black justify-between mt-4 mb-4 border-b border-zinc-200 flex-col md:flex-row items-center md:items-start">
       <Link to="/">
-        <h1 className="text-xl font-medium p-0">abid famasya</h1>
+        <h1 className="text-lg text-sky-900 font-medium p-0 bg-sky-50 rounded-lg hover:bg-sky-100 px-2">Abid Famasya</h1>
       </Link>
       <nav className="flex flex-row">
         {links.map((link) => (
