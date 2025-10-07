@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@import "@fontsource-variable/ibm-plex-sans";
+@import "@fontsource-variable/source-code-pro";
+
+body {
+  @apply m-0;
+  font-family: 'IBM Plex Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: 'Source Code Pro', monospace;
+}
+
+main p {
+  @apply tracking-wide;
+}
+
+main a {
+  @apply text-amber-700 hover:underline;
+}
+
+main h1 {
+  @apply text-xl font-medium;
+}
+
+#experience h1 {
+  @apply border-b border-zinc-300 mb-1 hover:bg-zinc-100 font-semibold text-lg;
+}
