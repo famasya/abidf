@@ -6,7 +6,7 @@ export const Route = createFileRoute("/blog/$slug")({
   loader: ({ context, params }) =>
     context.queryClient.ensureQueryData(blogPostQueryOptions(params.slug)),
   component: BlogPost,
-  errorComponent: () => <div>Post not found</div>,
+  errorComponent: ({ error }) => <div>Error: {error.message}</div>,
 });
 
 function BlogPost() {

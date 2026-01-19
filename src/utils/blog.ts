@@ -23,15 +23,22 @@ export function parseSlug(slug: string): number {
   return Number.parseInt(match[1], 10);
 }
 
+function getGitHubHeaders(): HeadersInit {
+  const headers: HeadersInit = {
+    "User-Agent": "request",
+    Accept: "application/vnd.github.v3+json",
+  };
+  const token = import.meta.env.VITE_GITHUB_TOKEN;
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+  return headers;
+}
+
 async function fetchBlogPosts(): Promise<GitHubIssue[]> {
   const res = await fetch(
     "https://api.github.com/repos/famasya/abidf/issues?labels=blog&sort=created&direction=desc",
-    {
-      headers: {
-        "User-Agent": "request",
-        Accept: "application/vnd.github.v3+json",
-      },
-    }
+    { headers: getGitHubHeaders() }
   );
   if (!res.ok) throw new Error("Failed to fetch blog posts");
   return res.json();
@@ -51,12 +58,7 @@ export const blogPostQueryOptions = (slug: string) =>
       const issueNumber = parseSlug(slug);
       const res = await fetch(
         `https://api.github.com/repos/famasya/abidf/issues/${issueNumber}`,
-        {
-          headers: {
-            "User-Agent": "request",
-            Accept: "application/vnd.github.v3+json",
-          },
-        }
+        { headers: getGitHubHeaders() }
       );
       if (!res.ok) throw new Error("Failed to fetch blog post");
       return res.json();
