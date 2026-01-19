@@ -5,13 +5,13 @@
 
 body {
   @apply m-0;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: 'Source Code Pro', monospace;
+  font-family: "Source Code Pro", monospace;
 }
 
 main p {
@@ -28,4 +28,8 @@ main h1 {
 
 #experience h1 {
   @apply border-b border-zinc-300 mb-1 hover:bg-zinc-100 font-semibold text-lg;
+}
+
+.prose pre {
+  @apply bg-zinc-100 p-2 rounded text-sm my-2 border border-zinc-200;
 }
