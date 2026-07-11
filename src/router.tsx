@@ -23,6 +23,6 @@ export const getRouter = () => {
       defaultPreloadStaleTime: 0,
       context: { queryClient },
     }),
-    queryClient
+    queryClient,
   );
 };

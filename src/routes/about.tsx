@@ -11,6 +11,34 @@ export const Route = createFileRoute("/about")({
         content:
           "Abid is a healthtech CTO, researcher, and indie builder passionate about small tools that solve boring problems.",
       },
+      {
+        property: "og:title",
+        content: "About - Abid Famasya",
+      },
+      {
+        property: "og:description",
+        content:
+          "Abid is a healthtech CTO, researcher, and indie builder passionate about small tools that solve boring problems.",
+      },
+      {
+        property: "og:url",
+        content: "https://abidf.com/about",
+      },
+      {
+        name: "twitter:title",
+        content: "About - Abid Famasya",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Abid is a healthtech CTO, researcher, and indie builder passionate about small tools that solve boring problems.",
+      },
+    ],
+    links: [
+      {
+        rel: "canonical",
+        href: "https://abidf.com/about",
+      },
     ],
   }),
   component: RouteComponent,
@@ -83,10 +111,7 @@ function RouteComponent() {
               Automagic Systems
             </a>
             : a personal lab focused on automation of boring tasks. My first product,{" "}
-            <a href="https://zenfin.app" target="_blank" rel="noopener noreferrer">
-              Zenfin
-            </a>
-            , is a WhatsApp-based personal finance tracker that turns casual chats and receipts into
+            Zenfin (now deceased), is a WhatsApp-based personal finance tracker that turns casual chats and receipts into
             clean financial insights using LLMs. Automagic explores ideas at the intersection of
             natural language, small tools, and everyday workflows.
           </p>

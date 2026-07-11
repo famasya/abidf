@@ -1,67 +1,19 @@
-import { queryOptions } from "@tanstack/react-query";
+import { allPosts } from "content-collections";
 
-export type GitHubIssue = {
-  id: number;
-  number: number;
+export type Post = {
+  slug: string;
   title: string;
-  body: string;
   created_at: string;
-  labels: { name: string; color: string }[];
+  description?: string;
+  content: string;
 };
 
-export function slugify(issue: GitHubIssue): string {
-  const titleSlug = issue.title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-  return `${issue.number}-${titleSlug}`;
+export function getSortedPosts(): Post[] {
+  return allPosts
+    .slice()
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 }
 
-export function parseSlug(slug: string): number {
-  const match = slug.match(/^(\d+)-/);
-  if (!match) throw new Error("Invalid slug");
-  return Number.parseInt(match[1], 10);
+export function getPostBySlug(slug: string): Post | undefined {
+  return allPosts.find((post) => post.slug === slug);
 }
-
-function getGitHubHeaders(): HeadersInit {
-  const headers: HeadersInit = {
-    "User-Agent": "request",
-    Accept: "application/vnd.github.v3+json",
-  };
-  const token = import.meta.env.VITE_GITHUB_TOKEN;
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
-  }
-  return headers;
-}
-
-async function fetchBlogPosts(): Promise<GitHubIssue[]> {
-  const res = await fetch(
-    "https://api.github.com/repos/famasya/abidf/issues?labels=blog&sort=created&direction=desc",
-    { headers: getGitHubHeaders() }
-  );
-  if (!res.ok) throw new Error("Failed to fetch blog posts");
-  return res.json();
-}
-
-export const blogPostsQueryOptions = () =>
-  queryOptions({
-    queryKey: ["blog", "posts"],
-    queryFn: fetchBlogPosts,
-    staleTime: 1000 * 60 * 5,
-  });
-
-export const blogPostQueryOptions = (slug: string) =>
-  queryOptions({
-    queryKey: ["blog", "post", slug],
-    queryFn: async (): Promise<GitHubIssue> => {
-      const issueNumber = parseSlug(slug);
-      const res = await fetch(
-        `https://api.github.com/repos/famasya/abidf/issues/${issueNumber}`,
-        { headers: getGitHubHeaders() }
-      );
-      if (!res.ok) throw new Error("Failed to fetch blog post");
-      return res.json();
-    },
-    staleTime: 1000 * 60 * 5,
-  });
