@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as CRouteImport } from './routes/c'
+import { Route as AutomagicRouteImport } from './routes/automagic'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CIndexRouteImport } from './routes/c.index'
@@ -25,6 +26,11 @@ const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
 const CRoute = CRouteImport.update({
   id: '/c',
   path: '/c',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AutomagicRoute = AutomagicRouteImport.update({
+  id: '/automagic',
+  path: '/automagic',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -56,6 +62,7 @@ const ApiPostsRoute = ApiPostsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/automagic': typeof AutomagicRoute
   '/c': typeof CRouteWithChildren
   '/llms.txt': typeof LlmsDottxtRoute
   '/api/posts': typeof ApiPostsRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/automagic': typeof AutomagicRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/api/posts': typeof ApiPostsRoute
   '/c/$slug': typeof CSlugRoute
@@ -74,6 +82,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/automagic': typeof AutomagicRoute
   '/c': typeof CRouteWithChildren
   '/llms.txt': typeof LlmsDottxtRoute
   '/api/posts': typeof ApiPostsRoute
@@ -85,17 +94,26 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/automagic'
     | '/c'
     | '/llms.txt'
     | '/api/posts'
     | '/c/$slug'
     | '/c/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/llms.txt' | '/api/posts' | '/c/$slug' | '/c'
+  to:
+    | '/'
+    | '/about'
+    | '/automagic'
+    | '/llms.txt'
+    | '/api/posts'
+    | '/c/$slug'
+    | '/c'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/automagic'
     | '/c'
     | '/llms.txt'
     | '/api/posts'
@@ -106,6 +124,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AutomagicRoute: typeof AutomagicRoute
   CRoute: typeof CRouteWithChildren
   LlmsDottxtRoute: typeof LlmsDottxtRoute
   ApiPostsRoute: typeof ApiPostsRoute
@@ -125,6 +144,13 @@ declare module '@tanstack/react-router' {
       path: '/c'
       fullPath: '/c'
       preLoaderRoute: typeof CRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/automagic': {
+      id: '/automagic'
+      path: '/automagic'
+      fullPath: '/automagic'
+      preLoaderRoute: typeof AutomagicRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -180,6 +206,7 @@ const CRouteWithChildren = CRoute._addFileChildren(CRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AutomagicRoute: AutomagicRoute,
   CRoute: CRouteWithChildren,
   LlmsDottxtRoute: LlmsDottxtRoute,
   ApiPostsRoute: ApiPostsRoute,

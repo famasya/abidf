@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 const links = [
   { to: "/", label: "home" },
   { to: "/about", label: "about" },
+  { to: "/automagic", label: "automagic" },
   { to: "/c", label: "blog" },
 ];
 export default function Header() {

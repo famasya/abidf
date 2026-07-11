@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -107,9 +107,9 @@ function RouteComponent() {
           <p>I believe that humans should be the boss of machines.</p>
           <p>
             I build tools under the name{" "}
-            <a href="https://automagic.abidf.com" target="_blank" rel="noopener noreferrer">
+            <Link to="/automagic">
               Automagic Systems
-            </a>
+            </Link>
             : a personal lab focused on automation of boring tasks. My first product,{" "}
             Zenfin (now deceased), is a WhatsApp-based personal finance tracker that turns casual chats and receipts into
             clean financial insights using LLMs. Automagic explores ideas at the intersection of
