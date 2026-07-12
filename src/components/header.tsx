@@ -4,7 +4,7 @@ const links = [
   { to: "/", label: "home" },
   { to: "/about", label: "about" },
   { to: "/automagic", label: "automagic" },
-  { to: "/c", label: "blog" },
+  { to: "/writings", label: "writings" },
 ];
 export default function Header() {
   return (

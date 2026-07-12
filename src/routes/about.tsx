@@ -47,14 +47,7 @@ export const Route = createFileRoute("/about")({
 function RouteComponent() {
   return (
     <>
-      <div className="mb-2">
-        <h1 className="font-bold!">tl;dr</h1>
-        <p>
-          I"m a healthtech CTO, researcher, and indie builder passionate about small tools that
-          solve boring problems.
-        </p>
-      </div>
-      <section id="experience" className="mt-4 mb-12 space-y-4">
+      <section id="experience" className="mb-12 space-y-4">
         <div className="space-y-4">
           <h1>Background</h1>
           <p>
@@ -91,12 +84,12 @@ function RouteComponent() {
             >
               Biomedical Named Entity Recognition (BioNER) model in Bahasa Indonesia
             </a>
-            , designed to identify biomedical entities in free-text data. I"ve also conducted
+            , designed to identify biomedical entities in free-text data. I've also conducted
             research in other areas, including the Internet of Underwater Things and network
             security.
           </p>
           <p>
-            I wrangled Jupyter Notebook daily to explore Transformer architectures, building on top
+            I wrangled Jupyter Notebook daily to explore <a href="https://en.wikipedia.org/wiki/Transformer_(deep_learning)" target="_blank" rel="noopener noreferrer">Transformer</a>, building on top
             of libraries like FlairNLP and Transformers, including scratch implementations in
             PyTorch.
           </p>
@@ -117,7 +110,7 @@ function RouteComponent() {
           </p>
 
           <p>
-            Beyond my work, I"ve been actively involved in civic and academic communities. I
+            Beyond my work, I've been actively involved in civic and academic communities. I
             contributed to{" "}
             <a href="https://kawalcovid19.id" target="_blank" rel="noopener noreferrer">
               KawalCovid19
@@ -153,6 +146,19 @@ function RouteComponent() {
             <a href="https://github.com/famasya" target="_blank" rel="noopener noreferrer">
               Github
             </a>
+            .
+          </p>
+          <p>
+            Reach me on{" "}
+            <a href="https://twitter.com/famasya" target="_blank" rel="noopener noreferrer">
+              Twitter
+            </a>
+            ,{" "}
+            <a href="https://linkedin.com/in/abid-famasya" target="_blank" rel="noopener noreferrer">
+              LinkedIn
+            </a>
+            , or by email at{" "}
+            <a href="mailto:contact@abidf.com">contact@abidf.com</a>
             .
           </p>
         </div>

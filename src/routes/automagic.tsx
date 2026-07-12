@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/automagic")({
   head: () => ({
@@ -73,6 +73,11 @@ function RouteComponent() {
             <p>
               Turns WhatsApp chats into personal money tracking and insights. No spreadsheets, no
               dashboards, no stress. Just chat like a human, we'll handle the boring bits.
+            </p>
+            <p className="text-sm text-gray-500">
+              <Link to="/writings/$slug" params={{ slug: "what-building-zenfin-taught-me" }} className="text-amber-700 hover:underline">
+                Why it didn't work out
+              </Link>
             </p>
           </div>
         </div>

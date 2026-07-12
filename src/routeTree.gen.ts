@@ -9,23 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WritingsRouteImport } from './routes/writings'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
-import { Route as CRouteImport } from './routes/c'
 import { Route as AutomagicRouteImport } from './routes/automagic'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as CIndexRouteImport } from './routes/c.index'
-import { Route as CSlugRouteImport } from './routes/c.$slug'
+import { Route as WritingsIndexRouteImport } from './routes/writings.index'
+import { Route as WritingsSlugRouteImport } from './routes/writings.$slug'
 import { Route as ApiPostsRouteImport } from './routes/api/posts'
 
+const WritingsRoute = WritingsRouteImport.update({
+  id: '/writings',
+  path: '/writings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
   id: '/llms.txt',
   path: '/llms.txt',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CRoute = CRouteImport.update({
-  id: '/c',
-  path: '/c',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AutomagicRoute = AutomagicRouteImport.update({
@@ -43,15 +43,15 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CIndexRoute = CIndexRouteImport.update({
+const WritingsIndexRoute = WritingsIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => CRoute,
+  getParentRoute: () => WritingsRoute,
 } as any)
-const CSlugRoute = CSlugRouteImport.update({
+const WritingsSlugRoute = WritingsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
-  getParentRoute: () => CRoute,
+  getParentRoute: () => WritingsRoute,
 } as any)
 const ApiPostsRoute = ApiPostsRouteImport.update({
   id: '/api/posts',
@@ -63,11 +63,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/automagic': typeof AutomagicRoute
-  '/c': typeof CRouteWithChildren
   '/llms.txt': typeof LlmsDottxtRoute
+  '/writings': typeof WritingsRouteWithChildren
   '/api/posts': typeof ApiPostsRoute
-  '/c/$slug': typeof CSlugRoute
-  '/c/': typeof CIndexRoute
+  '/writings/$slug': typeof WritingsSlugRoute
+  '/writings/': typeof WritingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -75,19 +75,19 @@ export interface FileRoutesByTo {
   '/automagic': typeof AutomagicRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/api/posts': typeof ApiPostsRoute
-  '/c/$slug': typeof CSlugRoute
-  '/c': typeof CIndexRoute
+  '/writings/$slug': typeof WritingsSlugRoute
+  '/writings': typeof WritingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/automagic': typeof AutomagicRoute
-  '/c': typeof CRouteWithChildren
   '/llms.txt': typeof LlmsDottxtRoute
+  '/writings': typeof WritingsRouteWithChildren
   '/api/posts': typeof ApiPostsRoute
-  '/c/$slug': typeof CSlugRoute
-  '/c/': typeof CIndexRoute
+  '/writings/$slug': typeof WritingsSlugRoute
+  '/writings/': typeof WritingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -95,11 +95,11 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/automagic'
-    | '/c'
     | '/llms.txt'
+    | '/writings'
     | '/api/posts'
-    | '/c/$slug'
-    | '/c/'
+    | '/writings/$slug'
+    | '/writings/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -107,43 +107,43 @@ export interface FileRouteTypes {
     | '/automagic'
     | '/llms.txt'
     | '/api/posts'
-    | '/c/$slug'
-    | '/c'
+    | '/writings/$slug'
+    | '/writings'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/automagic'
-    | '/c'
     | '/llms.txt'
+    | '/writings'
     | '/api/posts'
-    | '/c/$slug'
-    | '/c/'
+    | '/writings/$slug'
+    | '/writings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AutomagicRoute: typeof AutomagicRoute
-  CRoute: typeof CRouteWithChildren
   LlmsDottxtRoute: typeof LlmsDottxtRoute
+  WritingsRoute: typeof WritingsRouteWithChildren
   ApiPostsRoute: typeof ApiPostsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/writings': {
+      id: '/writings'
+      path: '/writings'
+      fullPath: '/writings'
+      preLoaderRoute: typeof WritingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/llms.txt': {
       id: '/llms.txt'
       path: '/llms.txt'
       fullPath: '/llms.txt'
       preLoaderRoute: typeof LlmsDottxtRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/c': {
-      id: '/c'
-      path: '/c'
-      fullPath: '/c'
-      preLoaderRoute: typeof CRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/automagic': {
@@ -167,19 +167,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/c/': {
-      id: '/c/'
+    '/writings/': {
+      id: '/writings/'
       path: '/'
-      fullPath: '/c/'
-      preLoaderRoute: typeof CIndexRouteImport
-      parentRoute: typeof CRoute
+      fullPath: '/writings/'
+      preLoaderRoute: typeof WritingsIndexRouteImport
+      parentRoute: typeof WritingsRoute
     }
-    '/c/$slug': {
-      id: '/c/$slug'
+    '/writings/$slug': {
+      id: '/writings/$slug'
       path: '/$slug'
-      fullPath: '/c/$slug'
-      preLoaderRoute: typeof CSlugRouteImport
-      parentRoute: typeof CRoute
+      fullPath: '/writings/$slug'
+      preLoaderRoute: typeof WritingsSlugRouteImport
+      parentRoute: typeof WritingsRoute
     }
     '/api/posts': {
       id: '/api/posts'
@@ -191,24 +191,26 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface CRouteChildren {
-  CSlugRoute: typeof CSlugRoute
-  CIndexRoute: typeof CIndexRoute
+interface WritingsRouteChildren {
+  WritingsSlugRoute: typeof WritingsSlugRoute
+  WritingsIndexRoute: typeof WritingsIndexRoute
 }
 
-const CRouteChildren: CRouteChildren = {
-  CSlugRoute: CSlugRoute,
-  CIndexRoute: CIndexRoute,
+const WritingsRouteChildren: WritingsRouteChildren = {
+  WritingsSlugRoute: WritingsSlugRoute,
+  WritingsIndexRoute: WritingsIndexRoute,
 }
 
-const CRouteWithChildren = CRoute._addFileChildren(CRouteChildren)
+const WritingsRouteWithChildren = WritingsRoute._addFileChildren(
+  WritingsRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AutomagicRoute: AutomagicRoute,
-  CRoute: CRouteWithChildren,
   LlmsDottxtRoute: LlmsDottxtRoute,
+  WritingsRoute: WritingsRouteWithChildren,
   ApiPostsRoute: ApiPostsRoute,
 }
 export const routeTree = rootRouteImport

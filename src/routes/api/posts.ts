@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { getSortedPosts } from "../../utils/blog";
+import { getSortedPosts } from "../../utils/writings";
 
 export const Route = createFileRoute("/api/posts")({
   server: {
@@ -16,8 +16,9 @@ export const Route = createFileRoute("/api/posts")({
               "@type": "Article",
               name: post.title,
               description: post.description ?? "",
-              url: `https://abidf.com/c/${post.slug}`,
+              url: `https://abidf.com/writings/${post.slug}`,
               datePublished: post.created_at,
+              inLanguage: post.lang,
               author: {
                 "@type": "Person",
                 name: "Abid Famasya",
